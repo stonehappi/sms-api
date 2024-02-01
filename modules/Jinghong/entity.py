@@ -1,2 +1,2 @@
-class Jinghong:
+class Stuff:
     pass 
