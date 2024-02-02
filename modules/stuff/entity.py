@@ -1,2 +1,2 @@
-class Stuff:
+class Stuff: asdasd
     pass 
