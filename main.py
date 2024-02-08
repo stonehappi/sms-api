@@ -19,8 +19,7 @@ set_route(app)
 
 @app.get("/")
 async def welcome():
-    a = 2 / 0
-    return f"Welcome to SCA {a}"
+    return f"Welcome to SCA"
 
 
 @app.get("/reset/{secret}")
@@ -28,9 +27,4 @@ async def reset(secret: str):
     if secret != "sca":
         return "Wrong secret"
     reset_factory()
-
-
-numbers = [1, 2, 3, 34]
-number = 3
-contact_types = ["phone", "email", "address"]
-contact_type = "phone, email, address"
+    return "Factory reset"
