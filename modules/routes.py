@@ -9,3 +9,7 @@ def set_route(app: FastAPI):
     from modules.teacher.controller import router as teacher_router
 
     app.include_router(teacher_router)
+    
+    from modules.staff.controller import router as staff_router
+
+    app.include_router(staff_router)
