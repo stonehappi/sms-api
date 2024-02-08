@@ -15,20 +15,39 @@ def gets(db: Session = Depends(get_db)):
 
 
 @router.get("/{item_id}")
-def get(item_id: UUID):
-    return f"get by id = {item_id}"
+def get(item_id: int, db: Session = Depends(get_db)):
+    item = db.query(User).filter(User.id == item_id).first()
+    if item:
+        return item
+    return {"message": "Item not found"}
 
 
 @router.post("")
-def create(item: UserInsertRequest):
-    return f"create new user {item}"
+def create(request: UserInsertRequest, db: Session = Depends(get_db)):
+    item = User(**request.dict())
+    db.add(item)
+    db.commit()
+    db.refresh(item)
+    return item
 
 
 @router.put("/{item_id}")
-def update(item_id: UUID, item: UserUpdateRequest):
-    return f"update user id = {item_id} and value = {item}"
+def updae(item_id: int, request: UserUpdateRequest, db: Session = Depends(get_db)):
+    old_item = db.query(User).filter(User.id == item_id).first()
+    if old_item:
+        for key, value in request.dict().items():
+            setattr(old_item, key, value)
+        db.commit()
+        db.refresh(old_item)
+        return old_item
+    return {"message": "Item not found"}
 
 
 @router.delete("/{item_id}")
-def delete(item_id: int):
-    return f"delete user id = {item_id}"
+def delete(item_id: int, db: Session = Depends(get_db)):
+    item = db.query(User).filter(User.id == item_id).first()
+    if item:
+        db.delete(item)
+        db.commit()
+        return {"message": "Item deleted successfully"}
+    return {"message": "Item not found"}
