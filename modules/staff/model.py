@@ -25,9 +25,6 @@ class Staff_UpdateRequest(BaseModel):
 class Staff_SalaryRequest(BaseModel):
     fullname: str
     salary: float
-    workhour: float
-    attendance_daily: datetime
-    login_time: time
-
-class Staff_DeleteRequest(BaseModel):
-    fullname: str
+    # workhour: float
+    # attendance_daily: datetime
+    # login_time: time
