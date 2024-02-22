@@ -1,25 +1,42 @@
 from fastapi import APIRouter, Depends
 
 from core.database import SessionLocal, get_db
-from modules.teacher.entity import Teacher
+from modules.building.entity import Building
+from modules.building.model import BuildingInsertRequest, BuildingUpdateRequest
 
 
-router = APIRouter(prefix="/teacher", tags=["teacher"])
+router = APIRouter(prefix="/building", tags=["building"])
 
 
 @router.get("/read")
 def read(db: SessionLocal = Depends(get_db)):
-    return db.query(Teacher).all()
+    return db.query(Building).all()
 
 
 @router.post("/create")
-def create():
-    return "create new teacher"
+def create(req: BuildingInsertRequest, db: SessionLocal = Depends(get_db)):
+    building = Building(**req.dict())
+    db.add(building)
+    db.commit()
+    return "Your record insert successfully"
 
 
-@router.get("/update")
-def update():
-    return "update teacher"
+@router.put("/update/{item_id}")
+def update(
+    item_id: int, req: BuildingUpdateRequest, db: SessionLocal = Depends(get_db)
+):
+    # get the existed building from database by id
+    oldItem = db.query(Building).filter(Building.id == item_id).first()
+    if oldItem is None:
+        return "Building not Found!"
+    else:
+        oldItem.floor = req.floor
+        oldItem.roos = req.roos
+        oldItem.date = req.date
+        oldItem.draft = req.draft
+        db.commit()
+        db.refresh(oldItem)
+        return "Update Successful"
 
 
 @router.get("/delete")
