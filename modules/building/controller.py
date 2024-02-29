@@ -39,14 +39,15 @@ def update(
         return "Update Successful"
 
 
-@router.get("/delete")
-def delete():
-    return "delete teacher"
-
-
-@router.get("/sr")
-def sr():
-    return "go to SR"
+@router.delete("/delete/{item_id}")
+def delete(item_id: int, db: SessionLocal = Depends(get_db)):
+    oldItem = db.query(Building).filter(Building.id == item_id).first()
+    if oldItem is None:
+        return "Building not Found!"
+    else:
+        db.delete(oldItem)
+        db.commit()
+        return "deleted Building"
 
 
 # from uuid import UUID
