@@ -4,17 +4,12 @@ from fastapi import Depends, APIRouter
 from sqlalchemy.orm import Session
 from core.database import get_db
 from modules.Company.entity import Company
-from modules.Company.model import CompanyInsertRequest, CompanyUpdateRequest
+from modules.Company.model import CompanyInsertRequest, CompanyListResponse, CompanyUpdateRequest, CompanyDeleteRequest
 
 router = APIRouter(prefix="/Company", tags=["Company"])
 
 
 @router.get("/read")
-def gets(db: Session = Depends(get_db)):
-    return db.query(Company).all()
-
-
-@router.get("/{item_id}")
 def get(item_id: int, db: Session = Depends(get_db)):
     item = db.query(Company).filter(Company.id == item_id).first()
     if item:
@@ -22,7 +17,7 @@ def get(item_id: int, db: Session = Depends(get_db)):
     return {"message": "Item not found"}
 
 
-@router.post("/Company")
+@router.post("/Company/{item_id}")
 def create(request: CompanyInsertRequest, db: Session = Depends(get_db)):
     item = Company(**request.dict())
     db.add(item)
@@ -31,7 +26,7 @@ def create(request: CompanyInsertRequest, db: Session = Depends(get_db)):
     return item
 
 @router.put("/Company/{item_id}")
-def updae(item_id: int, request: CompanyUpdateRequest, db: Session = Depends(get_db)):
+def update(item_id: int, request: CompanyUpdateRequest, db: Session = Depends(get_db)):
     old_item = db.query(Company).filter(Company.id == item_id).first()
     if old_item:
         old_item.update(request.dict())
