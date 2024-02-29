@@ -14,8 +14,11 @@ def read(db: SessionLocal = Depends(get_db)): # type: ignore
 
 
 @router.post("/create")
-def creat(req: CompanyInsertRequest):
-    return req
+def creat(req: CompanyInsertRequest, db: SessionLocal = Depends(get_db)): # type: ignore
+    item = Company(**req.dict())
+    db.add(item)
+    db.commit()
+    return "inserted"
 
 @router.put("/update/{item_id}")
 def update(
@@ -25,20 +28,19 @@ def update(
     if oldItem is None:
         return "Company not Found"
     else:
-        oldItem.floor= req.floor
-        oldItem.room = req.room
-        oldItem.short_name = req.short_name
+        oldItem.name= req.name
+        oldItem.address = req.address
         db.commit()
         return "Update Successfull"
     
-@router.get("/dlete/{item_id}")
+@router.delete("/dlete/{item_id}")
 def delete(
-    item_id: int,req:CompanyUpdateRequest, db:SessionLocal = Depends(get_db) # type: ignore
+    item_id: int, db:SessionLocal = Depends(get_db) # type: ignore
 ):      
     oldItem = db.query(Company).filter(Company.id == item_id).first()
-    if oldItem is NONE:
+    if oldItem is None:
         return "Company not found"
     else : 
         db.delete(oldItem)
-        db.comit()
+        db.commit()
         return "Company has deleted"
