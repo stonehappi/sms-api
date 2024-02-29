@@ -13,3 +13,7 @@ def set_route(app: FastAPI):
     from modules.staff.controller import router as staff_router
 
     app.include_router(staff_router)
+
+    from modules.Company.controller import router as Company_router
+
+    app.include_router(Company_router)
