@@ -1,3 +1,4 @@
+from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String
 from core.database import Base
 from core.entity import Entity
@@ -8,3 +9,4 @@ class Admin(Entity, Base):
     fullname = Column(String)
     password = Column(String)
     device = Column(Integer)
+
