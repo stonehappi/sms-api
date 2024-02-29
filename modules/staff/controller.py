@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from core.database import get_db
 from modules.staff.entity import Staff
-from modules.staff.model import NewStaff_InsertionRequest, Staff_SalaryRequest, Staff_UpdateRequest
+from modules.staff.model import NewStaff_InsertionRequest, Staff_UpdateRequest
 
 router = APIRouter(prefix="/staff", tags=["staff"])
 
@@ -15,7 +15,7 @@ router = APIRouter(prefix="/staff", tags=["staff"])
 def gets(db: Session = Depends(get_db)):
     return db.query(Staff).all()
 
-#
+# 
 # Get only one staff information
 #
 @router.get("/read/{item_id}")
@@ -66,6 +66,9 @@ def update(item_id: int, req: Staff_UpdateRequest, db: Session = Depends(get_db)
         oldItem.email = req.email
         db.commit()
         db.refresh(oldItem)
+        # oldItem = Staff(**req.dict())
+        # db.add(oldItem)
+        # db.commit()
         return "Staff Info Has Been Updated!!"
 
 #
