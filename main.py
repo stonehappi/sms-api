@@ -19,8 +19,8 @@ set_route(app)
 
 @app.get("/")
 async def welcome():
-    a = 2 / 0
-    return f"Welcome to SCA {a}"
+   
+    return f"Habibi Welcome To Hell"
 
 
 @app.get("/reset/{secret}")
