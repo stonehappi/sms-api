@@ -22,8 +22,8 @@ def gets(db: Session = Depends(get_db)):
 #
 @router.post("/create")
 def create(req: InsertNewPhone, db: Session = Depends(get_db)):
-    new_position = Phone(**req.dict())
-    db.add(new_position)
+    new_phone = Phone(**req.dict())
+    db.add(new_phone)
     db.commit()
     return "New Phone has been added!"
 
