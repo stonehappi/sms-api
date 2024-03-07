@@ -8,5 +8,4 @@ from core.entity import Entity
 class Position(Entity, Base):
     __tablename__ = "position"
     name = Column(String, index=True)
-    # department = Column(String)
     companyid = Column(Integer)
