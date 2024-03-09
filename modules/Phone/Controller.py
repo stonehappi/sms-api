@@ -28,8 +28,9 @@ def update(
     if oldItem is None:
         return "Phone not Found"
     else:
-        oldItem.name= req.name
-        oldItem.address = req.address
+        oldItem.Number= req.Number
+        oldItem.Name = req.Name
+        oldItem.ContactId = req.ContactId
         db.commit()
         return "Update Successfull"
     

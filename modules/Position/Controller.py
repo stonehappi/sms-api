@@ -28,8 +28,8 @@ def update(
     if oldItem is None:
         return "Position not Found"
     else:
-        oldItem.name= req.name
-        oldItem.address = req.address
+        oldItem.Name = req.Name
+        oldItem.CompanyId = req.CompanyId
         db.commit()
         return "Update Successfull"
     

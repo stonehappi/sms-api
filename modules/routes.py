@@ -12,3 +12,6 @@ def set_route(app: FastAPI):
     app.include_router(Email_router)
     from modules.Phone.Controller import router as Phone_router
     app.include_router(Phone_router)
+    from modules.Student.Controller import router as Student_router
+    app.include_router(Student_router)
+

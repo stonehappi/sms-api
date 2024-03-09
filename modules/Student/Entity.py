@@ -5,10 +5,11 @@ from core.database import Base
 from core.entity import Entity
 
 
-class Company(Entity, Base):
-    __tablename__ = "company"
+class Student(Entity, Base):
+    __tablename__ = "Student"
     name = Column(String)
     address = Column(String)
-    positions = relationship("Position", back_populates="company")
+    Age = Column(int)
+    
 
     
