@@ -8,5 +8,4 @@ class Company(Entity, Base):
     __tablename__ = "company"
     name = Column(String, name="Name", index=True, unique=True, nullable=False)
     address = Column(Integer, name="Address")
-
-    positions = relationship("Position", back_populates="company")
+    positions = relationship("Position", back_populates="company_001")

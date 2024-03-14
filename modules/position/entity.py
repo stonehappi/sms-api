@@ -7,7 +7,6 @@ from core.entity import Entity
 class Position(Entity, Base):
     __tablename__ = "position"
     name = Column(String, name="Name", index=True, unique=True, nullable=False)
-
     company_id = Column(Integer, ForeignKey("company.id"), name="CompanyId")
-
-    company = relationship("Company", back_populates="positions")
+    company = relationship("Company", back_populates="positions_007")
+    contacts = relationship("Contact", back_populates="position")
