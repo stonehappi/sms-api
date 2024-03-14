@@ -9,7 +9,7 @@ class Student(Entity, Base):
     __tablename__ = "Student"
     name = Column(String)
     address = Column(String)
-    Age = Column(int)
+    Age = Column(Integer)
     
 
     
