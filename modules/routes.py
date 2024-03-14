@@ -10,7 +10,6 @@ def set_route(app: FastAPI):
     from modules.Contact.controller import router as contact_router
     app.include_router(contact_router)
 
-
     from modules.Email.controller import router as email_router
     app.include_router(email_router)
 

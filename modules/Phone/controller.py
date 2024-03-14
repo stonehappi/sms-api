@@ -1,7 +1,5 @@
 
-
 from fastapi import APIRouter, Depends
-
 from sqlalchemy.orm import Session
 from core.database import get_db
 from modules.Phone.model import InsertNewPhone, UpdatePhone
@@ -32,25 +30,25 @@ def create(req: InsertNewPhone, db: Session = Depends(get_db)):
 #
 @router.put("/update/{phone_id}")
 def update(phone_id: int, req: UpdatePhone, db: Session = Depends(get_db)):
-    oldPosition = db.query(Phone).filter(Phone.id == phone_id).first()
-    if oldPosition is None:
+    oldphone = db.query(Phone).filter(Phone.id == phone_id).first()
+    if oldphone is None:
         return "Phone no found!!"
     else:
-        oldPosition.number = req.number 
-        oldPosition.name = req.name
-        oldPosition.contactid = req.contactid
+        oldphone.number = req.number 
+        oldphone.name = req.name
+        oldphone.contactid = req.contactid
         db.commit()
-        db.refresh(oldPosition)
+        db.refresh(oldphone)
         return "Phone Info Has Been Updated!!"
 
 #
-# Delete Phone
+# Delete Phone 
 #
 @router.delete("/delete")
 def delete(phone_id: int, db: Session = Depends(get_db)):
-    position = db.query(Phone).filter(Phone.id == phone_id).first()
-    if position:
-        db.delete(position)
+    phone = db.query(Phone).filter(Phone.id == phone_id).first()
+    if phone:
+        db.delete(phone)
         db.commit()
         return "Phone Has Been Deleted!!"
     return "Phone no found!!"

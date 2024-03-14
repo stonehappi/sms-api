@@ -1,5 +1,4 @@
 
-
 from fastapi import APIRouter, Depends
 
 from sqlalchemy.orm import Session
@@ -17,39 +16,39 @@ def gets(db: Session = Depends(get_db)):
     return db.query(Email).all()
 
 #
-# Create/Insert New Position
+# Create/Insert New Email
 #
 @router.post("/create")
 def create(req: InsertNewEmail, db: Session = Depends(get_db)):
-    new_position = Email(**req.dict())
-    db.add(new_position)
+    new_email = Email(**req.dict())
+    db.add(new_email)
     db.commit()
-    return "New Position has been added!"
+    return "New Email has been added!"
 
 #
-# Update/Change the Position
+# Update/Change the Email
 #
-@router.put("/update/{position_id}")
+@router.put("/update/{email_id}")
 def update(item_id: int, req: UpdateEmail, db: Session = Depends(get_db)):
     oldEmail = db.query(Email).filter(Email.id == item_id).first()
     if oldEmail is None:
-        return "Position no found!!"
+        return "Email no found!!"
     else: 
         oldEmail.mail = req.mail
         oldEmail.name = req.name
         oldEmail.contactid = req.contactid
         db.commit()
         db.refresh(oldEmail)
-        return "Position Info Has Been Updated!!"
+        return "Email Info Has Been Updated!!"
 
 #
-# Delete Position
+# Delete Email
 #
 @router.delete("/delete")
-def delete(position_id: int, db: Session = Depends(get_db)):
-    position = db.query(Email).filter(Email.id == position_id).first()
-    if position:
-        db.delete(position)
+def delete(email_id: int, db: Session = Depends(get_db)):
+    email = db.query(Email).filter(Email.id == email_id).first()
+    if email:
+        db.delete(email)
         db.commit()
-        return "Position Has Been Deleted!!"
-    return "Position no found!!"
+        return "Email Has Been Deleted!!"
+    return "Email no found!!"

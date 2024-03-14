@@ -8,6 +8,6 @@ from core.entity import Entity
 class Company(Entity, Base):
     __tablename__ = "company"
     name = Column(String, index=True, name="Company Name")
-    address = Column(String)
+    address = Column(String, name="Address")
     
     positions = relationship("Position", back_populates="company")
