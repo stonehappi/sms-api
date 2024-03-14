@@ -12,4 +12,7 @@ class Contact(Entity, Base):
     Last_name = Column(String, unique=True)
 
     Position_id = Column(Integer, ForeignKey("Position.id"))
-    position = relationship("Position", backref="Contacts")
+    position = relationship("Position", back_populates="Contacts")
+    
+    emails = relationship("Email", back_populates="contact")
+    phones = relationship("Phone", back_populates="contact")

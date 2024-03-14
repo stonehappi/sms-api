@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from core.entity import Entity
@@ -10,4 +10,7 @@ class Email(Entity, Base):
     #id = Column(Integer, primary_key=True)
     mail = Column(String, unique=True)
     name = Column(String, unique=True)
-    Contact_id = Column(Integer)
+
+    Contact_id = Column(Integer, ForeignKey("Contact.id"))
+    contact = relationship("Contact", back_populates= "emails")
+    

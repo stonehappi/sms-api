@@ -29,8 +29,8 @@ def update(item_id: int, request: CompanyUpdateRequest, db: Session = Depends(ge
         # old_item.update(request.dict())
         return {"message": "Item not found"}
     else:
-        name = request.name
-        Address = request.Address
+        old_item.name = request.name
+        old_item.Address = request.Address
         db.commit()
         db.refresh(old_item)
         return "Updated"

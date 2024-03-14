@@ -13,4 +13,4 @@ class Position(Entity, Base):
     Company_id = Column(Integer, ForeignKey("Company.id"))
     company = relationship("Company", back_populates="positions")
 
-    Contact = relationship("Contact", back_populates= "position")
+    Contacts = relationship("Contact", back_populates= "position")
