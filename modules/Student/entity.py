@@ -9,3 +9,4 @@ class Student(Entity, Base):
     name = Column(String, name="Name", index=True)
     address = Column(String, name="Address")
     age = Column(Integer, name="Age")
+    major = Column(String, name="Major")
