@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     database_url: str = os.getenv(
         "DATABASE_URL",
         # "postgres://master_long_db:nzYjkYBawfH4mLLKZwtvBoEUXDFH1lfT@dpg-cnp7otn109ks73esml3g-a.singapore-postgres.render.com/supplychain_api_db",
-        "postgresql://postgres:password@localhost/SMS_DB",
+        "postgresql://postgres:password@localhost/postgres",
     )
     secret_key: str = os.getenv("SECRET_KEY", "9cfe4731588484c858a3900c71f57833")
     jwt_issuer: str = os.getenv("JWT_ISSUER", "3b532505bb1afbbe537527343f78e048")
