@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     app_name: str = os.getenv("APP_NAME", "My Api")
     database_url: str = os.getenv(
         "DATABASE_URL",
-        "postgresql://guxpmgnv:9Wy3FwoITwks2jQOAytcLxQiFAhIfdSI@rain.db.elephantsql.com/guxpmgnv",
+        "postgresql://ecard_ttrw_user:5d5A4fNLchwuagneswQRYfb9cMhjCW44@dpg-co2dn3ol6cac73bm265g-a.oregon-postgres.render.com/ecard_ttrw",
     )
     secret_key: str = os.getenv("SECRET_KEY", "9cfe4731588484c858a3900c71f57833")
     jwt_issuer: str = os.getenv("JWT_ISSUER", "3b532505bb1afbbe537527343f78e048")
