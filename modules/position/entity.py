@@ -1,10 +1,16 @@
-from pydantic import BaseModel
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 from core.database import Base
 from core.entity import Entity
 
 
-class position(Entity, Base):
-    __tablename__="position"
-    name  = Column(String)
-    Address = Column(Integer)
+class Position(Entity, Base):
+    __tablename__ = "position"
+    name = Column(String, name="Name", index=True, unique=True, nullable=False)
+
+    company_id = Column(Integer, ForeignKey("company.id"), name="CompanyId")
+    company = relationship("Company", back_populates="positions")
+
+    contacts=relationship("Contact",back_populates="position") 
+
+

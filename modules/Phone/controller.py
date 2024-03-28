@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends
 from core.database import SessionLocal, get_db
 
-from modules.Phone.entity import Phone
-from modules.Phone.model import phoneInsertRequest, phoneUpdateRequest
-
+from modules.phone.entity import Phone
+from modules.phone.model import phoneInsertRequest, phoneUpdateRequest
 router=APIRouter(prefix="/phone",tags=["phone"])
 
 @router.get("/read")

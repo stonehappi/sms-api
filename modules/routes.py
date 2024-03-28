@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 
 def set_route(app: FastAPI):
-    from modules.Phone.controller import router as phone_router
+    from modules.phone.controller import router as phone_router
     app.include_router(phone_router)
     from modules.contact.controller import router as contact_router
     app.include_router(contact_router)

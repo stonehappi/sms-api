@@ -2,8 +2,8 @@ from pydantic import BaseModel
 
 
 class companyInsertRequest(BaseModel):
-    Name : str
-    Address : int
+    name : str
+    address : int
 class companyUpdateRequest(BaseModel):
-    Name : str
-    Address : int
+    name : str
+    address : int
